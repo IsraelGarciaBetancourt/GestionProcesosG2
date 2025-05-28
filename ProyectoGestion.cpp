@@ -100,3 +100,39 @@ void buscarPorID() {
     else
         cout << "Proceso no encontrado.\n";
 }
+
+// Busca proceso por nombre, pide nombre al usuario
+void buscarPorNombre() {
+    string nombre;
+    cout << "Ingrese nombre a buscar: ";
+    cin.ignore();
+    getline(cin, nombre);
+
+    Proceso* actual = cabezaProcesos;
+    while (actual != NULL && actual->nombre != nombre) actual = actual->siguiente;
+
+    if (actual != NULL)
+        cout << "Encontrado: PID=" << actual->pid << ", Nombre: " << actual->nombre << ", Prioridad: " << actual->prioridad << endl;
+    else
+        cout << "Proceso no encontrado.\n";
+}
+
+// Modifica la prioridad pidiendo datos al usuario
+void modificarPrioridad() {
+    int pid, prioridad;
+    cout << "Ingrese PID a modificar: ";
+    cin >> pid;
+    cout << "Ingrese nueva prioridad: ";
+    cin >> prioridad;
+
+    Proceso* p = cabezaProcesos;
+    while (p != NULL && p->pid != pid) p = p->siguiente;
+
+    if (p != NULL) {
+        p->prioridad = prioridad;
+        cout << "Prioridad modificada.\n";
+    } else {
+        cout << "Proceso no encontrado.\n";
+    }
+}
+
