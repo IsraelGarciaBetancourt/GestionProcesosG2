@@ -190,3 +190,89 @@ void estadoMemoria() {
         actual = actual->siguiente;
     }
 }
+
+// --- Menu principal ---
+
+void menu() {
+    int opcionPrincipal = 0;
+
+    do {
+        system("cls");
+        cout << "=== Menu Principal ===\n";
+        cout << "1. Gestor de Procesos\n";
+        cout << "2. Gestor de Memoria\n";
+        cout << "3. Salir\n";
+        cout << "Seleccione una opcion: ";
+        cin >> opcionPrincipal;
+        cin.ignore();
+
+        switch (opcionPrincipal) {
+            case 1: {
+                int opProceso = 0;
+                do {
+                    system("cls");
+                    cout << "--- Gestor de Procesos ---\n";
+                    cout << "1. Insertar nuevo proceso\n";
+                    cout << "2. Eliminar proceso\n";
+                    cout << "3. Buscar proceso por ID\n";
+                    cout << "4. Buscar proceso por nombre\n";
+                    cout << "5. Modificar prioridad de proceso\n";
+                    cout << "6. Mostrar todos los procesos\n";
+                    cout << "7. Volver al menu principal\n";
+                    cout << "Seleccione una opcion: ";
+                    cin >> opProceso;
+                    cin.ignore();
+
+                    switch(opProceso) {
+						case 1: insertarProceso(); break;
+						case 2: eliminarProceso(); break;
+						case 3: buscarPorID(); break;
+						case 4: buscarPorNombre(); break;
+						case 5: modificarPrioridad(); break;
+						case 6: mostrarProcesos(); break;
+                        case 7: cout << "Volviendo al menu principal...\n"; break;
+                        default: cout << "Opcion invalida.\n"; break;
+                    }
+                    system("pause");
+                } while (opProceso != 7);
+                break;
+            }
+            case 2: {
+                int opMemoria = 0;
+                do {
+                    system("cls");
+                    cout << "--- Gestor de Memoria ---\n";
+                    cout << "1. Asignar memoria a proceso (push)\n";
+                    cout << "2. Liberar memoria (pop)\n";
+                    cout << "3. Ver estado actual de la memoria\n";
+                    cout << "4. Volver al menu principal\n";
+                    cout << "Seleccione una opcion: ";
+                    cin >> opMemoria;
+                    cin.ignore();
+
+                    switch(opMemoria) {
+						case 1: asignarMemoria(); break;
+						case 2: liberarMemoria(); break;
+						case 3: estadoMemoria(); break;
+                        case 4: cout << "Volviendo al menu principal...\n"; break;
+                        default: cout << "Opcion invalida.\n"; break;
+                    }
+                    system("pause");
+                } while (opMemoria != 4);
+                break;
+            }
+            case 3:
+                cout << "Saliendo del programa...\n";
+                break;
+            default:
+                cout << "Opcion invalida. Intente de nuevo.\n";
+                system("pause");
+                break;
+        }
+    } while (opcionPrincipal != 3);
+}
+
+int main() {
+    menu();
+    return 0;
+}
