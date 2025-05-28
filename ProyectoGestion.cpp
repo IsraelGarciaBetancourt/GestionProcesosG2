@@ -135,4 +135,58 @@ void modificarPrioridad() {
         cout << "Proceso no encontrado.\n";
     }
 }
+// Muestra todos los procesos
+void mostrarProcesos() {
+    if (cabezaProcesos == NULL) {
+        cout << "No hay procesos registrados." << endl;
+        return;
+    }
+    Proceso* actual = cabezaProcesos;
+    while (actual != NULL) {
+        cout << "PID: " << actual->pid << ", Nombre: " << actual->nombre << ", Prioridad: " << actual->prioridad << endl;
+        actual = actual->siguiente;
+    }
+}
 
+// Asigna memoria pidiendo PID y tamaño
+void asignarMemoria() {
+    int pid, tamanio;
+    cout << "Ingrese PID del proceso: ";
+    cin >> pid;
+    cout << "Ingrese tamanio de memoria a asignar: ";
+    cin >> tamanio;
+
+    BloqueMemoria* nuevo = new BloqueMemoria;
+    nuevo->pid = pid;
+    nuevo->tamanio = tamanio;
+    nuevo->siguiente = topeMemoria;
+    topeMemoria = nuevo;
+
+    cout << "Memoria asignada al proceso " << pid << " (tamanio: " << tamanio << ")" << endl;
+}
+
+// Libera memoria del tope
+void liberarMemoria() {
+    if (topeMemoria == NULL) {
+        cout << "No hay memoria para liberar." << endl;
+        return;
+    }
+    BloqueMemoria* temp = topeMemoria;
+    topeMemoria = topeMemoria->siguiente;
+    cout << "Memoria liberada del proceso " << temp->pid << " (tamanio: " << temp->tamanio << ")" << endl;
+    delete temp;
+}
+
+// Muestra el estado de la memoria
+void estadoMemoria() {
+    if (topeMemoria == NULL) {
+        cout << "La memoria está completamente libre." << endl;
+        return;
+    }
+    cout << "Estado actual de la memoria (tope a base):" << endl;
+    BloqueMemoria* actual = topeMemoria;
+    while (actual != NULL) {
+        cout << "Proceso " << actual->pid << " - Tamanio: " << actual->tamanio << endl;
+        actual = actual->siguiente;
+    }
+}
