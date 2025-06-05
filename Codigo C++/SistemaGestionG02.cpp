@@ -226,6 +226,29 @@ void encolarProcesoEnPlanificador() {
     cout << "Proceso encolado en planificador correctamente.\n";
 }
 
+// Desencola y "ejecuta" el primer proceso (mayor prioridad)
+void desencolarYEjecutarProceso() {
+	
+    cout << "--- Desencolar y ejecutar proceso ---\n";
+    
+    // Verifica si la cola está vacía
+    if (cabezaCola == NULL) {
+        cout << "La cola de planificación está vacía.\n";
+        return;
+    }
+
+    NodoCola* temp = cabezaCola;				// Toma el primer nodo (mayor prioridad)
+    cabezaCola = cabezaCola->siguiente;        // Avanza el inicio de la cola
+	
+	// Muestra información del proceso a ejecutar
+    cout << "Ejecutando proceso:\n";
+    cout << "PID: " << temp->proceso->pid << ", Nombre: " << temp->proceso->nombre << ", Prioridad: " << temp->proceso->prioridad << "\n";
+
+    delete temp;	// Libera el nodo ejecutado
+}
+
+
+
 
 
 //---------------- GESTOR DE MEMORIA ----------------//
