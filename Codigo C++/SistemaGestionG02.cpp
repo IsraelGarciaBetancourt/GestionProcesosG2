@@ -359,6 +359,107 @@ void estadoMemoria() {
     }
 }
 
+//---------------- MENÚ PRINCIPAL ----------------//
+
+void menu() {
+    int opcionPrincipal;
+
+    do {
+        do {
+            cout << "\n=== Menu Principal ===\n";
+            cout << "1. Gestor de Procesos\n";
+            cout << "2. Planificador de CPU (Cola de Prioridad)\n";
+            cout << "3. Gestor de Memoria\n";
+            cout << "4. Salir\n";
+            cout << "Seleccione una opcion (1-4): ";
+            cin >> opcionPrincipal;
+
+            if (opcionPrincipal < 1 || opcionPrincipal > 4) {
+                cout << "Opcion invalida. Por favor ingrese un número entre 1 y 4.\n";
+            }
+            cin.clear();
+        } while (opcionPrincipal < 1 || opcionPrincipal > 4);
+
+        switch (opcionPrincipal) {
+            case 1: {
+                int opcionProceso;
+                do {
+                    cout << "\n--- Gestor de Procesos ---\n";
+                    cout << "1. Insertar nuevo proceso\n";
+                    cout << "2. Eliminar proceso\n";
+                    cout << "3. Mostrar todos los procesos\n";
+                    cout << "4. Volver al menu principal\n";
+                    cout << "Seleccione una opcion (1-4): ";
+                    cin >> opcionProceso;
+
+                    switch (opcionProceso) {
+                        case 1: insertarProceso(); break;
+                        case 2: eliminarProceso(); break;
+                        case 3: mostrarProcesos(); break;
+                        case 4: cout << "Volviendo al menu principal...\n"; break;
+                        default: cout << "Opcion invalida.\n"; break;
+                    }
+
+                    system("pause"); // Espera una tecla
+                    system("cls");   // Limpia pantalla
+                } while (opcionProceso != 4);
+                break;
+            }
+            case 2: {
+                int opcionPlanificador;
+                do {
+                    cout << "\n=== Planificador de CPU (Cola de Prioridad) ===\n";
+                    cout << "1. Encolar proceso por PID\n";
+                    cout << "2. Desencolar y ejecutar proceso\n";
+                    cout << "3. Mostrar cola actual\n";
+                    cout << "4. Volver al menu principal\n";
+                    cout << "Seleccione una opcion (1-4): ";
+                    cin >> opcionPlanificador;
+
+                    switch (opcionPlanificador) {
+                        case 1: encolarProcesoEnPlanificador(); break;
+                        case 2: desencolarYEjecutarProceso(); break;
+                        case 3: mostrarColaPlanificador(); break;
+                        case 4: cout << "Volviendo al menu principal...\n"; break;
+                        default: cout << "Opcion invalida.\n"; break;
+                    }
+
+                    system("pause");
+                    system("cls");
+                } while (opcionPlanificador != 4);
+                break;
+            }
+            case 3: {
+                int opcionMemoria;
+                do {
+                    cout << "\n--- Gestor de Memoria ---\n";
+                    cout << "1. Asignar memoria a proceso (push)\n";
+                    cout << "2. Liberar memoria (pop)\n";
+                    cout << "3. Ver estado actual de la memoria\n";
+                    cout << "4. Volver al menu principal\n";
+                    cout << "Seleccione una opcion (1-4): ";
+                    cin >> opcionMemoria;
+
+                    switch (opcionMemoria) {
+                        case 1: asignarMemoria(); break;
+                        case 2: liberarMemoria(); break;
+                        case 3: estadoMemoria(); break;
+                        case 4: cout << "Volviendo al menu principal...\n"; break;
+                        default: cout << "Opcion invalida.\n"; break;
+                    }
+
+                    system("pause");
+                    system("cls");
+                } while (opcionMemoria != 4);
+                break;
+            }
+            case 4:
+                cout << "Saliendo del programa...\n";
+                break;
+        }
+
+    } while (opcionPrincipal != 4);
+}
 
 
 
