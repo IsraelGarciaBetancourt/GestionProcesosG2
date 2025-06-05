@@ -247,8 +247,24 @@ void desencolarYEjecutarProceso() {
     delete temp;	// Libera el nodo ejecutado
 }
 
-
-
+// Muestra la cola de planificación
+void mostrarColaPlanificador() {
+	
+    cout << "--- Cola de planificación (ordenada por prioridad) ---\n";
+    
+    // Si está vacía, lo indica
+    if (cabezaCola == NULL) {
+        cout << "La cola de planificación está vacía.\n";
+        return;
+    }
+	
+	// Recorre la cola e imprime cada proceso
+    NodoCola* actual = cabezaCola;
+    while (actual != NULL) {
+        cout << "PID: " << actual->proceso->pid << ", Nombre: " << actual->proceso->nombre << ", Prioridad: " << actual->proceso->prioridad << "\n";
+        actual = actual->siguiente;
+    }
+}
 
 
 //---------------- GESTOR DE MEMORIA ----------------//
